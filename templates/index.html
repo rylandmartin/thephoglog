@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>The Phog Log</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="topbar-toggle">
+        <label for="darkModeToggle" title="Toggle Dark Mode">🌙</label>
+        <input type="checkbox" id="darkModeToggle">
+    </div>
+    
+    <main class="home-card">
+        <h1>The Phog Log</h1>
+        <p class="subtitle">Your personalized KU nutrition tracker powered by Gemini!</p>
+        {% if log and log.targets %}
+        <div class="stat-grid">
+            <div class="stat-card">
+                <h4>Calories</h4>
+                <p>{{ log['calories'] }} / {{ log['targets']['calories'] }}</p>
+                <small>{{ log['progress']['calories'] }} met</small>
+            </div>
+            <div class="stat-card">
+                <h4>Protein</h4>
+                <p>{{ log['protein'] }}g / {{ log['targets']['protein'] }}g</p>
+                <small>{{ log['progress']['protein'] }} met</small>
+            </div>
+            <div class="stat-card">
+                <h4>Carbs</h4>
+                <p>{{ log['carbs'] }}g / {{ log['targets']['carbs'] }}g</p>
+                <small>{{ log['progress']['carbs'] }} met</small>
+            </div>
+            <div class="stat-card">
+                <h4>Fat</h4>
+                <p>{{ log['fat'] }}g / {{ log['targets']['fat'] }}g</p>
+                <small>{{ log['progress']['fat'] }} met</small>
+            </div>
+        </div>
+        {% endif %}
+        
+        <p>Welcome, {{ username }}! What would you like to do today?</p>
+
+        <div class="action-buttons">
+            <a href="/profile">📝 Create or Edit Your Profile</a>
+            <a href="/mealplan">📋 Generate a New Meal Plan</a>
+            <a href="/log">🍽️ Log What You Ate</a>
+            <a href="/summary">📊 View Today's Summary</a>
+            <a href="/viewlog">📅 View a Previous Log</a>
+            <a href="/logout">🚪 Sign Out</a>
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2025 The Phog Log
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('darkModeToggle');
+        const prefersDark = localStorage.getItem('darkMode') === 'true';
+        if (prefersDark) {
+            document.body.classList.add('dark-mode');
+            if (toggle) toggle.checked = true;
+        }
+    
+        toggle?.addEventListener('change', () => {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        });
+    </script>    
+</body>
+</html>

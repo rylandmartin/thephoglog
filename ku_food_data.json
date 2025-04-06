@@ -1,0 +1,35 @@
+[
+    {
+      "name": "Grilled Chicken Breast",
+      "location": "Mrs. E's",
+      "meal": "Lunch",
+      "days": ["Monday", "Wednesday", "Friday", "Saturday"],
+      "calories": 180,
+      "protein": 32,
+      "carbs": 0,
+      "fat": 4,
+      "tags": ["gluten-free", "dairy-free"]
+    },
+    {
+      "name": "Mac and Cheese",
+      "location": "Mrs. E's",
+      "meal": "Dinner",
+      "days": ["Tuesday", "Thursday", "Saturday"],
+      "calories": 400,
+      "protein": 10,
+      "carbs": 50,
+      "fat": 20,
+      "tags": ["vegetarian", "contains-dairy"]
+    },
+    {
+      "name": "Beef Taco Bowl",
+      "location": "South Dining",
+      "meal": "Lunch",
+      "days": ["Monday", "Thursday", "Sunday"],
+      "calories": 550,
+      "protein": 35,
+      "carbs": 45,
+      "fat": 20,
+      "tags": ["gluten-free"]
+    }
+  ]

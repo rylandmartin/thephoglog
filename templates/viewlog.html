@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>View Previous Log - The Phog Log</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div>
+            <a href="/">🏠 Home</a>
+            <a href="/log">🍽️ Log Food</a>
+            <a href="/summary">📊 View Summary</a>
+            <a href="/viewlog">📅 View Previous Logs</a>
+        </div>
+        <div class="toggle-container">
+            <label for="darkModeToggle" style="color: white;">🌙</label>
+            <input type="checkbox" id="darkModeToggle">
+        </div>
+    </div>
+
+    <main>
+        <h2>View a Previous Log</h2>
+
+        <form method="POST">
+            <label for="log_date">Select a date:</label>
+            <input type="date" name="log_date" required>
+            <button type="submit">View Log</button>
+        </form>
+
+        {% if selected_date %}
+            <h3>Log for {{ selected_date }}</h3>
+
+            {% if log %}
+                <ul>
+                    <li><strong>Calories:</strong> {{ log['calories'] }} / {{ log['targets']['calories'] }} ({{ log['progress']['calories'] }})</li>
+                    <li><strong>Protein:</strong> {{ log['protein'] }}g / {{ log['targets']['protein'] }}g ({{ log['progress']['protein'] }})</li>
+                    <li><strong>Carbs:</strong> {{ log['carbs'] }}g / {{ log['targets']['carbs'] }}g ({{ log['progress']['carbs'] }})</li>
+                    <li><strong>Fat:</strong> {{ log['fat'] }}g / {{ log['targets']['fat'] }}g ({{ log['progress']['fat'] }})</li>
+                </ul>
+
+                <h4>Foods Eaten:</h4>
+                <ul>
+                    {% for food in log['foods'] %}
+                        <li>{{ food['name'] }} ({{ food['calories'] }} cal, {{ food['protein'] }}g P, {{ food['carbs'] }}g C, {{ food['fat'] }}g F)</li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No log found for that date.</p>
+            {% endif %}
+        {% endif %}
+    </main>
+
+    <footer>
+        &copy; 2025 The Phog Log
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('darkModeToggle');
+        const prefersDark = localStorage.getItem('darkMode') === 'true';
+        if (prefersDark) {
+            document.body.classList.add('dark-mode');
+            toggle.checked = true;
+        }
+
+        toggle?.addEventListener('change', () => {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        });
+    </script>
+</body>
+</html>

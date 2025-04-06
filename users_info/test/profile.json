@@ -1,0 +1,14 @@
+{
+  "height": 58,
+  "weight": 169,
+  "age": 20,
+  "sex": "male",
+  "activity_level": "sedentary",
+  "goal": "bulk",
+  "allergies": [
+    "treenut"
+  ],
+  "dislikes": [
+    "chinese"
+  ]
+}

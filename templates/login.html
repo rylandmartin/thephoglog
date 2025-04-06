@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login - The Phog Log</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="home-card">
+        <h1>The Phog Log</h1>
+        <p class="subtitle">Your personalized KU nutrition tracker powered by Gemini!</p>
+
+        <h2>Login</h2>
+        <form method="POST">
+            <input type="text" name="username" placeholder="Your KU ID or name" required>
+            <br>
+            <button type="submit">Continue</button>
+        </form>
+    </main>
+
+    <footer>
+        &copy; 2025 The Phog Log
+    </footer>
+
+    <script>
+        const prefersDark = localStorage.getItem('darkMode') === 'true';
+        if (prefersDark) {
+            document.body.classList.add('dark-mode');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+{
+  "calories": 550,
+  "protein": 35,
+  "carbs": 45,
+  "fat": 20,
+  "foods": [
+    {
+      "name": "Beef Taco Bowl",
+      "location": "South Dining",
+      "meal": "Lunch",
+      "days": [
+        "Monday",
+        "Thursday",
+        "Sunday"
+      ],
+      "calories": 550,
+      "protein": 35,
+      "carbs": 45,
+      "fat": 20,
+      "tags": [
+        "gluten-free"
+      ]
+    }
+  ],
+  "targets": {
+    "protein": 169,
+    "carbs": 273,
+    "fat": 49,
+    "calories": 2210
+  },
+  "progress": {
+    "calories": "25%",
+    "protein": "21%",
+    "carbs": "16%",
+    "fat": "41%"
+  }
+}

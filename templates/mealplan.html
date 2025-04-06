@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Meal Plan - The Phog Log</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div>
+            <a href="/">🏠 Home</a>
+            <a href="/log">🍽️ Log Food</a>
+            <a href="/summary">📊 View Summary</a>
+            <a href="/viewlog">📅 View Previous Logs</a>
+        </div>
+        <div class="toggle-container">
+            <label for="darkModeToggle" style="color: white;">🌙</label>
+            <input type="checkbox" id="darkModeToggle">
+        </div>
+    </div>
+
+    <main>
+        <h2>Generated Meal Plan</h2>
+
+        {% if mealplan %}
+            <pre>{{ mealplan }}</pre>
+        {% else %}
+            <p>No meal plan could be generated.</p>
+        {% endif %}
+    </main>
+
+    <footer>
+        &copy; 2025 The Phog Log
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('darkModeToggle');
+        const prefersDark = localStorage.getItem('darkMode') === 'true';
+        if (prefersDark) {
+            document.body.classList.add('dark-mode');
+            toggle.checked = true;
+        }
+
+        toggle?.addEventListener('change', () => {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        });
+    </script>
+</body>
+</html>

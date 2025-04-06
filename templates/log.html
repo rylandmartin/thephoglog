@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Log Food</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div>
+            <a href="/">🏠 Home</a>
+            <a href="/log">🍽️ Log Food</a>
+            <a href="/summary">📊 View Summary</a>
+            <a href="/viewlog">📅 View Previous Logs</a>
+        </div>
+        <div class="toggle-container">
+            <label for="darkModeToggle" style="color: white;">🌙</label>
+            <input type="checkbox" id="darkModeToggle">
+        </div>
+    </div>
+
+    <main>
+        <h2>Log Food Eaten Today</h2>
+
+        <form method="POST">
+            <p>Select the foods you ate today:</p>
+
+            {% for food in foods %}
+            <label>
+                {{ food['name'] }} ({{ food['location'] }} - {{ food['meal'] }}) —
+                Quantity:
+                <input type="number" name="quantity_{{ food['name'] | replace(' ', '_') }}" min="0" value="0" style="width: 40px;">
+            </label><br>
+            {% endfor %}
+
+            <br>
+            <button type="submit">Log Selected Foods</button>
+        </form>
+    </main>
+
+    <footer>
+        &copy; 2025 The Phog Log
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('darkModeToggle');
+        const prefersDark = localStorage.getItem('darkMode') === 'true';
+        if (prefersDark) {
+            document.body.classList.add('dark-mode');
+            toggle.checked = true;
+        }
+
+        toggle?.addEventListener('change', () => {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        });
+    </script>
+</body>
+</html>

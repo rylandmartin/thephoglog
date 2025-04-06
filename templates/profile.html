@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Edit Profile - The Phog Log</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="navbar">
+        <div>
+            <a href="/">🏠 Home</a>
+            <a href="/log">🍽️ Log Food</a>
+            <a href="/summary">📊 View Summary</a>
+            <a href="/viewlog">📅 View Previous Logs</a>
+        </div>
+        <div class="toggle-container">
+            <label for="darkModeToggle" style="color: white;">🌙</label>
+            <input type="checkbox" id="darkModeToggle">
+        </div>
+    </div>
+
+    <main>
+        <h2>Edit Profile</h2>
+        <form method="POST">
+            <label>Height (inches):</label>
+            <input type="number" name="height" min="10" max="100" value="{{ profile.get('height', '') }}" required>
+
+            <label>Weight (lbs):</label>
+            <input type="number" name="weight" min="40" max="1000" value="{{ profile.get('weight', '') }}" required>
+
+            <label>Age:</label>
+            <input type="number" name="age" min="5" max="130" value="{{ profile.get('age', '') }}" required>
+
+            <label>Sex:</label>
+            <select name="sex" required>
+                <option value="male" {% if profile.get('sex') == 'male' %}selected{% endif %}>Male</option>
+                <option value="female" {% if profile.get('sex') == 'female' %}selected{% endif %}>Female</option>
+            </select>
+
+            <label>Activity Level:</label>
+            <select name="activity_level" required>
+                {% for level in ['sedentary', 'light', 'moderate', 'active', 'very active'] %}
+                    <option value="{{ level }}" {% if profile.get('activity_level') == level %}selected{% endif %}>{{ level.title() }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Goal:</label>
+            <select name="goal" required>
+                {% for g in ['bulk', 'cut', 'maintain'] %}
+                    <option value="{{ g }}" {% if profile.get('goal') == g %}selected{% endif %}>{{ g.title() }}</option>
+                {% endfor %}
+            </select>
+
+            <label>Allergies (comma separated):</label>
+            <input type="text" name="allergies" value="{{ ', '.join(profile.get('allergies', [])) }}">
+
+            <label>Dislikes (comma separated):</label>
+            <input type="text" name="dislikes" value="{{ ', '.join(profile.get('dislikes', [])) }}">
+
+            <button type="submit">Save Profile</button>
+        </form>
+    </main>
+
+    <footer>
+        &copy; 2025 The Phog Log
+    </footer>
+
+    <script>
+        const toggle = document.getElementById('darkModeToggle');
+        const prefersDark = localStorage.getItem('darkMode') === 'true';
+        if (prefersDark) {
+            document.body.classList.add('dark-mode');
+            toggle.checked = true;
+        }
+
+        toggle?.addEventListener('change', () => {
+            document.body.classList.toggle('dark-mode');
+            localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+        });
+    </script>
+</body>
+</html>
